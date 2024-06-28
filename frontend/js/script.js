@@ -9,10 +9,8 @@ function parseData(content){
     for(let i=0; i < content.length;i++){
         let concierto=content[i];
 
-        //Filtramos la informacion del concierto y construimos diseño
+        //Filtramos la informacion del concierto y construimos CARD x CONCIERTO
         const conciertoDiv = document.createElement("div");
-        const idConcierto = document.createElement("h2");
-        idConcierto.innerText=`Concierto: ${concierto.idConcierto}`;
         const titulo = document.createElement("h3");
         titulo.innerText=concierto.Nombre;
         const artista = document.createElement("h4");
@@ -20,15 +18,20 @@ function parseData(content){
         const imagen= document.createElement("img");
         imagen.src=concierto.Imagen;
         imagen.alt=`Imagen: ${concierto.Artista} : ${concierto.titulo}`;
+        const descripcion=document.createElement("p");
+        descripcion.innerText=`Descripción: ${concierto.Descripcion}`;
         const direccion = document.createElement("p");
         direccion.innerText=`Direccion: ${concierto.Direccion}`;
+        const fecha=document.createElement("p");
+        fecha.innerText=`Fecha: ${concierto.Fecha}`;
 
         //Agregamos el concierto en un div
-        conciertoDiv.append(idConcierto);
         conciertoDiv.append(titulo);
         conciertoDiv.append(artista);
         conciertoDiv.append(imagen);
+        conciertoDiv.append(descripcion);
         conciertoDiv.append(direccion);
+        conciertoDiv.append(fecha);
 
         //Agregamos el div del concierto en el section
         section.append(conciertoDiv);
