@@ -4,6 +4,7 @@ CREATE TABLE Concierto(
     ,Nombre VARCHAR(255) NOT NULL
     ,Artista VARCHAR(1000) NOT NULL
     ,Imagen VARCHAR(1000) NOT NULL
+    ,Descripcion VARCHAR(2000)NOT NULL
     ,Direccion VARCHAR(800) NOT NULL
     ,Fecha DATETIME NOT NULL
 );
