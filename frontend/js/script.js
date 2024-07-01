@@ -11,24 +11,22 @@ function parseData(content){
 
         //Filtramos la informacion del concierto y construimos CARD x CONCIERTO
         const conciertoDiv = document.createElement("div");
-        const titulo = document.createElement("h3");
-        titulo.innerText=concierto.Nombre;
-        const artista = document.createElement("h4");
-        artista.innerText=`Artista: ${concierto.Artista}`;
+        conciertoDiv.classList.add("card-concierto");
+        const artista = document.createElement("h3");
+        artista.innerText=`${concierto.Artista}`;
         const imagen= document.createElement("img");
         imagen.src=concierto.Imagen;
         imagen.alt=`Imagen: ${concierto.Artista} : ${concierto.titulo}`;
         const descripcion=document.createElement("p");
-        descripcion.innerText=`Descripción: ${concierto.Descripcion}`;
+        descripcion.innerText=`${concierto.Descripcion}`;
         const direccion = document.createElement("p");
-        direccion.innerText=`Direccion: ${concierto.Direccion}`;
+        direccion.innerHTML=`<i class="fa-solid fa-location-dot"></i> <span>${concierto.Direccion}</span>`;
         const fecha=document.createElement("p");
-        fecha.innerText=`Fecha: ${concierto.Fecha}`;
+        fecha.innerHTML=`<i class="fa-regular fa-calendar-days"></i> <span>${concierto.Fecha}</span>`;
 
         //Agregamos el concierto en un div
-        conciertoDiv.append(titulo);
-        conciertoDiv.append(artista);
         conciertoDiv.append(imagen);
+        conciertoDiv.append(artista);
         conciertoDiv.append(descripcion);
         conciertoDiv.append(direccion);
         conciertoDiv.append(fecha);
