@@ -18,9 +18,11 @@ const app = express();
 // + info: basicamente, al tener al cliente y servidor en distintos puertos se generan algunos inconvenientes
 // con este codigo creamos un Proxy el cual interactua como intermediario entre ambos.
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 
 //creamos dependencia para usar json
 app.use(express.json());
