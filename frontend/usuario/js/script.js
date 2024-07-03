@@ -1,51 +1,98 @@
-document.getElementById('idFormulario').addEventListener('submit', function(event) {
-    // Evitar el envío del formulario
-    event.preventDefault(); 
+// -------------- FETCH POST PARA CREAR UN NUEVO USUARIO -----------------------------------------
+document.getElementById('formRegistro').addEventListener('submit', function (event) {
+  // Evitar el envío del formulario
+  event.preventDefault();
 
-    // Consigo los datos del formulario
-    const usuario = document.getElementById('usuario').value;
-    const contraseña = document.getElementById('contraseña').value;
-    const dni = document.getElementById('dni').value;
-    const nombre = document.getElementById('nombre').value;
-    const apellido = document.getElementById('apellido').value;
-    const mail = document.getElementById('mail').value;
-    const telefono = document.getElementById('telefono').value;
-    const newUser = {
-      usuario: usuario,
-      contraseña: contraseña,
-      dni: dni,
-      nombre: nombre,
-      apellido: apellido,
-      mail: mail,
-      telefono: telefono
-    };
+  // Consigo los datos del formulario
+  const usuario = document.getElementById('usuario').value;
+  const contraseña = document.getElementById('contraseña').value;
+  const dni = document.getElementById('dni').value;
+  const nombre = document.getElementById('nombre').value;
+  const apellido = document.getElementById('apellido').value;
+  const mail = document.getElementById('mail').value;
+  const telefono = document.getElementById('telefono').value;
+  const newUser = {
+    usuario: usuario,
+    contraseña: contraseña,
+    dni: dni,
+    nombre: nombre,
+    apellido: apellido,
+    mail: mail,
+    telefono: telefono
+  };
 
-    //debugueo de usuario
-    console.log(newUser);
+  // Configuración de la solicitud
+  const method = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newUser)
+  };
 
-    // Configuración de la solicitud
-    const method = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newUser)
-    };
+  // Hacer la solicitud POST
+  fetch('http://localhost:3000/ticketCode/usuario', method)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('No se pudo crear el usuario');
+      }
+      return response.json();
+    })
+    .then(newUser => {
+      console.log('Respuesta:', newUser);
+      //aca se puede mostrar desde el index que se creo el usuario
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+});
 
-    // Hacer la solicitud POST
-    fetch('http://localhost:3000/ticketCode/usuario', method)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('No se pudo crear el usuario');
-        }
-        return response.json();
-      })
-      .then(newUser => {
-        console.log('Respuesta:', newUser);
-        //aca se puede mostrar desde el index que se creo el usuario
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  });
+
+// --------------------------- FETCH POST PARA EL LOGIN DEL USUARIO
+
+document.getElementById('formInicio').addEventListener('submit', function (event) {
+  // Evitar el envío del formulario
+  event.preventDefault();
+
+  // Consigo los datos del formulario
+  const usuario = document.getElementById('usuarioID').value;
+  const contraseña = document.getElementById('contraseñaID').value;
+  const dataUser = {
+    usuario: usuario,
+    contraseña: contraseña,
+  };
+
+  // Configuración de la solicitud
+  const method = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataUser)
+  };
+
+  // Hacer la solicitud POST
+  fetch('http://localhost:3000/ticketCode/login', method)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('front POST: no se pudo encontrar la ruta');
+      }
+      return response.json();
+    })
+    .then(resultado => {
+      if(resultado['estado']==true){
+        console.log('Usuario ingresado exitosamente');
+        //aca podes dirigir al usuario hacia donde quiera
+      }
+      else{
+        console.log('Usuario no encontrado');
+       //aca debes informar que el usuario o contraseña no fueron ingresados correctamente o bien no existen
+      }
+      
+      
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+});
 
