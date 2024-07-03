@@ -23,30 +23,38 @@ const createUser = (req,res) => {
 }
 
 const searchUser = (req, res) => {
-    const usuario = req.params.usuario;
-    const contraseña = req.params.contraseña;
-    const sql = 'SELECT usuario, contraseña FROM cliente WHERE usuario = ? AND contraseña = ?';
-    console.log(usuario);
-    db.query(sql, [usuario, contraseña], (err, result) => {
-        if (err) {
-            // Manejar el error, por ejemplo:
-            console.error('Error al buscar usuario:', err);
-            res.status(500).json({ error: 'Error interno del servidor' });
-            return;
-        }
-
-        // Si no hay error y se encontró un usuario
-        if (result.length > 0) {
-            res.json({ message: 'Usuario encontrado', usuario: result[0].usuario, contraseña: result[0].contraseña });
-        } else {
-            res.status(404).json({ message: 'Usuario no encontrado' });
-        }
-    });
+   const {usuario,contraseña}=req.body;
+   const sql = 'SELECT usuario,contraseña from cliente where usuario=? and contraseña=?';
+   db.query(sql,[usuario,contraseña],(err,results) => {
+    if(err) throw err;
+    if(results.length > 0){
+        res.json({estado:true});
+    }
+    else{
+        res.json({estado:false});
+    }
+   })
 };
 
+const getConcertById=(req,res)=>{
+    const {id} = req.params;
+    const sql='SELECT * FROM concierto WHERE idConcierto=?';
+    db.query(sql, [id], (err, results) => {
+        if (err){
+            console.log(`ticketCode.js --> error encontrado: ${err}`);
+        };
+        console.log("Concierto encontrado.");
+        res.json(results);
+    });
+}
+const createCompra = (req,res) => {
+    //falta desarrollar viendo que datos se van a obtener del body
+}
 // IMPORTANTE ENVIAR TODAS LAS PETICIONES QUE QUERRAMOS PROBAR
 module.exports={
     getAllConcerts
     ,createUser
     ,searchUser
+    ,getConcertById
+    ,createCompra
 };
