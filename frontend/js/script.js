@@ -22,7 +22,9 @@ function parseData(content){
         const direccion = document.createElement("p");
         direccion.innerHTML=`<i class="fa-solid fa-location-dot"></i> <span>${concierto.Direccion}</span>`;
         const fecha=document.createElement("p");
-        fecha.innerHTML=`<i class="fa-regular fa-calendar-days"></i> <span>${concierto.Fecha}</span>`;
+        const fechaa = concierto.Fecha.slice(8,10)+"-"+concierto.Fecha.slice(5,7)+"-"+concierto.Fecha.slice(0,4);
+        const hora = concierto.Fecha.slice(11,16);
+        fecha.innerHTML=`<i class="fa-regular fa-calendar-days"></i> <span>${fechaa}</span> <span>${hora}hs</span>`;
 
         //Agregamos el concierto en un div
         conciertoDiv.append(imagen);

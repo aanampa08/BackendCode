@@ -24,6 +24,11 @@ header{
     align-items: center;
 }
 
+.hcontainer a{
+    color: white;
+    text-decoration: none;
+}
+
 #infoPrincipal{
     margin: 35px 0;
     display: flex;
@@ -73,6 +78,7 @@ main{
     font-size: 1.15rem;
 }
 
+
 .card-concierto h4{
     font-size: 1.05rem;
     font-weight: 600;
@@ -84,4 +90,38 @@ main{
 
 .card-concierto span{
     font-weight: 500;
+}
+
+.formularios{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+#formRegistro{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#formInicio{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+
+/* Remueve la parte del input numbers donde se muestran
+las flechas para subir o disminuir valor, de igual manera
+con el scroll sigue pudiendose subir el valor del numero */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
