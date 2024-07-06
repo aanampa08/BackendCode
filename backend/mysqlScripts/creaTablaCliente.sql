@@ -1,7 +1,7 @@
 USE ticketcode;
 
 create table cliente(
-	idCliente INT AUTO_INCREMENT NOT NULL
+	idCliente INT AUTO_INCREMENT PRIMARY KEY NOT NULL
     ,Usuario VARCHAR(100) NOT NULL
     ,Contraseña VARCHAR(100) NOT NULL
     ,Dni INT NOT NULL
