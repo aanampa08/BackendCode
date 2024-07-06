@@ -9,5 +9,6 @@ router.post('/usuario',ticketCode.createUser);
 router.post('/login',ticketCode.searchUser);
 router.get('/concierto/:id',ticketCode.getConcertById);
 router.post('/compra',ticketCode.createCompra);
+router.get('/compras/:id',ticketCode.getAllcompras);
 router.get('/ticket',ticketCode.getAlltickets);
 module.exports=router;
