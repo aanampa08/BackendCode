@@ -48,8 +48,27 @@ const getConcertById=(req,res)=>{
     });
 }
 const createCompra = (req,res) => {
-    //falta desarrollar viendo que datos se van a obtener del body
+    const {fecha,monto,usuario_id} = req.body;
+    const sql = 'INSERT INTO compra(Fecha,Monto,usuario_id) VALUES (?,?,?)';
+    db.query(sql,[fecha,monto,usuario_id],(err, result) => {
+        if(err) throw err;
+        
+        // res.json({estado:true});
+    });
 }
+
+const getAlltickets = (req,res) => {
+    const sql = 'SELECT * FROM ticket';
+    db.query(sql, (err,results)=>{
+        if (err){
+            console.log(`ticketCode.js --> error encontrado: ${err}`);
+        };
+        console.log("Estas accediendo a todos los tickets");
+        res.json(results);
+    });
+}
+
+
 // IMPORTANTE ENVIAR TODAS LAS PETICIONES QUE QUERRAMOS PROBAR
 module.exports={
     getAllConcerts
@@ -57,4 +76,5 @@ module.exports={
     ,searchUser
     ,getConcertById
     ,createCompra
+    ,getAlltickets
 };
