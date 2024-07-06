@@ -1,0 +1,7 @@
+USE ticketcode;
+
+CREATE TABLE Ticket(
+	idTicket INT AUTO_INCREMENT NOT NULL PRIMARY KEY
+    ,Sector VARCHAR(200) NOT NULL
+    ,Precio FLOAT NOT NULL
+);
