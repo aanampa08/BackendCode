@@ -56,7 +56,8 @@ main{
     background-color: rgb(235, 235, 235);
     border-radius: 15px;
     gap: 15px;
-    cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .card-concierto:hover{
@@ -124,4 +125,184 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.card-concierto-adentro{
+    width: 100%;
+    display: flex;
+    padding: 25px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 15px;
+    gap: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.card-concierto-adentro img{
+    max-width: 250px;
+    object-fit: contain;
+}
+
+#hola{
+    width: 100%;
+}
+
+#chau{
+    margin-top: 80px;
+}
+.descripciones{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#metodo-de-pago{
+    width: 50%;
+}
+
+.mdepago{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mdepago label{
+    text-align: center;
+    padding: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+
+
+.mdepago label:nth-child(2){
+    background-color: rgb(88, 88, 88);
+    
+}
+
+.mdepago label:nth-child(4){
+    background-color: #00B1EA;
+}
+
+.mdepago label:nth-child(6){
+    background-color: #00447c;
+}
+
+.mdepago label:hover{
+    filter: brightness(0.95);
+}
+.mdepago input:checked + label {
+    border: 3px solid rgb(0, 0, 0);
+  }
+  
+
+input[type=radio]{
+    display: none;
+}
+
+.estadio-img{
+    
+    width: 300px;
+}
+
+.elegir{
+    display: flex;
+    margin-top: 30px;
+    gap: 25px;
+}
+
+.botones{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.botones label{
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: rgb(235, 235, 235);
+    
+}
+
+.botones label:hover{
+    background-color: rgb(212, 212, 212);
+    
+}
+
+.botones input:checked + label {
+    background-color: rgb(95, 95, 95);
+    color: white;
+  }
+
+  .number-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 15px 0;
+}
+
+.number-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #cccccc3d;
+    font-size: 1.5rem;
+}
+
+.number-input-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    border: none;
+    background-color: #f1f1f1;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px;
+}
+
+.number-input-button:active {
+    background-color: #ddd;
+}
+
+.number-input-button:first-of-type {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.number-input-button:last-of-type {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#precio p{
+    font-size: 1.5rem;
+}
+
+#submitCompra{
+    margin-top: 15px;
+    padding: 15px 50px;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(85, 85, 85);
+    color: white;
+    
 }

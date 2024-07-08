@@ -10,7 +10,9 @@ function parseData(content){
         let concierto=content[i];
 
         //Filtramos la informacion del concierto y construimos CARD x CONCIERTO
-        const conciertoDiv = document.createElement("div");
+        const conciertoDiv = document.createElement("a");
+        conciertoDiv.setAttribute("href", `./cardabierta.html?id=${concierto.idConcierto}`);
+
         conciertoDiv.classList.add("card-concierto");
         const artista = document.createElement("h3");
         artista.innerText=`${concierto.Artista}`;
@@ -44,7 +46,7 @@ function request_error(error){
 }
 
 // PROGRAMA PRINCIPAL
-fetch("http://localhost:3000/ticketCode")
+fetch("http://localhost:3000/ticketCode/conciertos")
 .then(response_received)
 .then(parseData)
 .catch(request_error);
