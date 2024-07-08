@@ -6,7 +6,8 @@ const ticketCode = require('../controller/ticketCode');
 //Generamos las rutas, y llamamos el desarrollo que va a realizar la peticion
 router.get('/conciertos',ticketCode.getAllConcerts);
 router.post('/usuario',ticketCode.createUser);
-router.post('/login',ticketCode.searchUser);
+router.post('/login',ticketCode.loginUser);
+router.get('/infoUser',ticketCode.getInfoUser);
 router.get('/concierto/:id',ticketCode.getConcertById);
 router.post('/compra',ticketCode.createCompra);
 router.get('/compras/:id',ticketCode.getAllcompras);
