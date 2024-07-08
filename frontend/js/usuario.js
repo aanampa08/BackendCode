@@ -94,4 +94,3 @@ document.getElementById('formInicio').addEventListener('submit', function (event
       console.error('Error:', error);
     });
 });
-
