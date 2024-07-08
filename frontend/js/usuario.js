@@ -80,16 +80,15 @@ document.getElementById('formInicio').addEventListener('submit', function (event
       return response.json();
     })
     .then(resultado => {
-      if(resultado['estado']==true){
-        console.log('Usuario ingresado exitosamente');
-        //aca podes dirigir al usuario hacia donde quiera
+      if (resultado.auth && resultado.token) {
+        //guardamos el token en el storage
+        localStorage.setItem('token', resultado.token);
+        // window.location.href = "./dashboard.html";
       }
-      else{
-        console.log('Usuario no encontrado');
-       //aca debes informar que el usuario o contraseña no fueron ingresados correctamente o bien no existen
+      else {
+        console.error('error de inicio de sesion: ', resultado);
       }
-      
-      
+
     })
     .catch(error => {
       console.error('Error:', error);
