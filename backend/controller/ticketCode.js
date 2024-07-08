@@ -1,4 +1,7 @@
 const db = require('../db/db');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const config = require('../config/config');
 
 //Desarrollamos acciones del sistema de la pagina
 const getAllConcerts = (req,res) =>{
@@ -14,27 +17,60 @@ const getAllConcerts = (req,res) =>{
 
 const createUser = (req,res) => {
     const {usuario,contraseña,dni,nombre,apellido,mail,telefono} = req.body;
+    const hashcontraseña = bcrypt.hashSync(contraseña,8);
     const sql = 'INSERT INTO cliente(Usuario,Contraseña,Dni,Nombre,Apellido,Mail,Telefono)VALUES(?,?,?,?,?,?,?)';
-    db.query(sql,[usuario,contraseña,dni,nombre,apellido,mail,telefono],(err, result) => {
+    db.query(sql,[usuario,hashcontraseña,dni,nombre,apellido,mail,telefono],(err, result) => {
         if(err) throw err;
-        res.json({message:'Usuario creado.'});
+        //genera un token para el nuevo usuario
+        const token = jwt.sign({ id: result.insertId}, config.secretKey, { expiresIn: config.tokenExpiresIn });
+        console.log(result.insertId);
+        // res.json({message:'Usuario creado.'});
+        console.log("Usuario creado");
+        res.status(201).send({ auth: true, token });
     });
 
 }
 
-const searchUser = (req, res) => {
+const loginUser = (req, res) => {
    const {usuario,contraseña}=req.body;
-   const sql = 'SELECT usuario,contraseña from cliente where usuario=? and contraseña=?';
+   const sql = 'SELECT * from cliente where usuario=?';
    db.query(sql,[usuario,contraseña],(err,results) => {
     if(err) throw err;
-    if(results.length > 0){
-        res.json({estado:true});
+    if (results.length > 0) {
+        const esValidacontraseña = bcrypt.compareSync(contraseña, results[0].Contraseña);
+        if (!esValidacontraseña) return res.status(401).send({ auth: false, token: null });
+        const token = jwt.sign({ id: results[0].idCliente,username: results[0].Usuario}, config.secretKey, { expiresIn: config.tokenExpiresIn });
+        res.status(200).send({ auth: true, token });
     }
-    else{
-        res.json({estado:false});
+    else {
+        res.json({ estado: false });
     }
-   })
+   });
 };
+
+const getInfoUser = (req,res) => {
+    // Obtener el token de la cabecera Authorization
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+  
+    // Si no se proporciona el token
+    if (!token) {
+      return res.status(401).json({ error: 'Token no proporcionado.' });
+    }
+  
+    // Verificar y decodificar el token
+    jwt.verify(token, config.secretKey, (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ error: 'Token inválido.' });
+      }
+  
+      // Aquí puedo realizar consultas a la base de datos y obtener información del usuario
+      // Por ahora, devolvemos la información decodificada del token
+      const demo = jwt.decode(token);
+      console.log(demo); // Aquí debería estar la información del usuario
+      // Ejemplo: Actualizar el DOM con el nombre de usuario
+      res.json(decoded);
+    });
+}
 
 const getConcertById=(req,res)=>{
     const {id} = req.params;
@@ -108,7 +144,8 @@ const getAllcompras = (req,res) => {
 module.exports={
     getAllConcerts
     ,createUser
-    ,searchUser
+    ,loginUser
+    ,getInfoUser
     ,getConcertById
     ,createCompra
     ,getAlltickets
