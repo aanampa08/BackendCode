@@ -153,16 +153,32 @@ const getAllcompras = (req, res) => {
 const updateUser = (req, res) => {
     //recibimos el id del usuario a borrar
     const { id } = req.params;
-    const { usuario } = req.body;
-    const sql = 'UPDATE Cliente SET Usuario = ? WHERE idCliente=?';
+    const { nuevoUsuario } = req.body;
+    console.log("genero el nuevo: ",id,nuevoUsuario);
+    const sql = 'UPDATE Cliente SET Usuario=? WHERE idCliente=?';
 
-    db.query(sql, [usuario, id], (err, result) => {
+    db.query(sql, [nuevoUsuario, id], (err, result) => {
         if (err) throw err;
         res.json({ mensaje: 'Nombre de usuario actualizado' });
     });
 
-}
-    ;
+};
+
+const deleteCompra = (req,res) => {
+    //recibimos el id de la compra a borrar
+    const {idCompra} = req.params;
+    
+    const sql = 'DELETE FROM detalle_compra WHERE compra_id = ?';
+    db.query(sql,[idCompra],(err,result) => {
+        if (err) throw err;
+        const sql1 = 'DELETE FROM compra WHERE idCompra = ?';
+        db.query(sql1,[idCompra],(err,result)=>{
+            if (err) throw err;
+            res.json({mensaje: 'Compra eliminada correctamente'});
+        });
+
+    });
+};
 // IMPORTANTE ENVIAR TODAS LAS PETICIONES QUE QUERRAMOS PROBAR
 module.exports = {
     getAllConcerts
@@ -172,6 +188,7 @@ module.exports = {
     , updateUser
     , getConcertById
     , createCompra
+    ,deleteCompra
     , getAlltickets
     , getAllcompras
 };

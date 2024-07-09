@@ -12,5 +12,6 @@ router.put('/usuario/:id',ticketCode.updateUser);
 router.get('/concierto/:id',ticketCode.getConcertById);
 router.post('/compra',ticketCode.createCompra);
 router.get('/compras/:id',ticketCode.getAllcompras);
+router.delete('/compra/:idCompra',ticketCode.deleteCompra);
 router.get('/ticket',ticketCode.getAlltickets);
 module.exports=router;
