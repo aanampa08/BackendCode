@@ -84,6 +84,7 @@ document.getElementById('formInicio').addEventListener('submit', function (event
         //guardamos el token en el storage
         localStorage.setItem('token', resultado.token);
         // window.location.href = "./dashboard.html";
+        console.log("se hizo el loguin");
       }
       else {
         console.error('error de inicio de sesion: ', resultado);
