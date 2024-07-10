@@ -132,9 +132,9 @@ const getAllcompras = (req, res) => {
             const idCompra = resultado_compra[0].idCompra;
             const monto = resultado_compra[0].Monto;
             const fecha = resultado_compra[0].Fecha;
-            const sql_detalle = 'select compra_id,Nombre,sector,precio_unitario from ticket,detalle_compra,concierto where compra_id=? and ticket_id=idTicket and concierto.idConcierto=detalle_compra.concierto_id;';
+            const sql_detalle = 'select compra_id,Nombre,sector,precio_unitario from compra,ticket,detalle_compra,concierto where usuario_id=? and compra_id=idCompra and ticket_id=idTicket and concierto.idConcierto=detalle_compra.concierto_id';
 
-            db.query(sql_detalle, [idCompra], (err, resultado_detalle_compra) => {
+            db.query(sql_detalle, [id], (err, resultado_detalle_compra) => {
                 if (err) throw err;
 
                 res.json({ idCompra, monto, fecha, resultado_detalle_compra });
