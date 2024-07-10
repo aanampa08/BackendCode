@@ -14,4 +14,5 @@ router.post('/compra',ticketCode.createCompra);
 router.get('/compras/:id',ticketCode.getAllcompras);
 router.delete('/compra/:idCompra',ticketCode.deleteCompra);
 router.get('/ticket',ticketCode.getAlltickets);
+router.post('/logout',ticketCode.logout);
 module.exports=router;

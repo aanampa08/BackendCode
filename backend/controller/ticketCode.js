@@ -179,6 +179,31 @@ const deleteCompra = (req,res) => {
 
     });
 };
+
+
+
+const logout = (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+        return res.status(400).send({ message: 'No token provided' });
+    }
+
+    // Insertar el token en la tabla de tokens inválidos
+    const query = 'INSERT INTO tokenInvalido (token) VALUES (?)';
+    db.query(query, [token], (err, results) => {
+        if (err) {
+            if (err.code === 'ER_DUP_ENTRY') {
+                // Si el token ya está en la base de datos, devolver un mensaje de éxito
+                return res.status(200).send({ message:true });
+            } else {
+                return res.status(500).send({ message: 'Failed to invalidate token', error: err });
+            }
+        }
+        res.status(200).send({ message: true});
+    });
+};
+
 // IMPORTANTE ENVIAR TODAS LAS PETICIONES QUE QUERRAMOS PROBAR
 module.exports = {
     getAllConcerts
@@ -191,4 +216,5 @@ module.exports = {
     ,deleteCompra
     , getAlltickets
     , getAllcompras
+    ,logout
 };
