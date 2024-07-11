@@ -172,7 +172,7 @@ document.getElementById('compraForm').addEventListener('submit', function (event
     
     // Consigo los datos del formulario
     const monto = precioClickeado * cantidad;
-    const usuario_id = document.getElementById('idUser').value;
+    const usuario_id = idDeUsuario;
     const fecha = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const concierto_id = conciertoId;
     const ticketsid = [];

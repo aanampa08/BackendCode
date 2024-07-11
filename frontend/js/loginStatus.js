@@ -1,10 +1,14 @@
+let inicioSesion = false;
+let idDeUsuario;
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // Obtener el token del localStorage
     const token = localStorage.getItem('token');
 
     // Si el token no está presente
     if (!token) {
-        console.error('Token no encontrado en el localStorage.');
+        console.log('Usuario NO LOGUEADO');
         return;
     }
 
@@ -27,9 +31,41 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             // Se puede agregar lo que se necesita a la pagina con la informacion del usuario
             console.log('Datos del usuario:', data);
+            const styleSheet = document.styleSheets[0];
+            for (let i = 0; i < styleSheet.cssRules.length; i++) {
+                if (styleSheet.cssRules[i].selectorText === '#loginbutton::before') {
+                    styleSheet.cssRules[i].style.setProperty('content', `"${data[0].Nombre}"`);
+                }
+            }
+            if (data != null) {
+                inicioSesion = true;
+            } else {
+                inicioSesion = false;
+            }
+
+            idDeUsuario = data[0].idCliente;
+
+            cargarDatosUsuario(idDeUsuario);
 
         })
         .catch(error => {
             console.error('Error al obtener datos del usuario:', error);
         });
+
 });
+
+function perfilOn() {
+    if (inicioSesion == true) {
+        window.location.href = "./perfil.html";
+    } else {
+        window.location.href = "./reglogin.html";
+    }
+}
+
+function perfilOn2() {
+    if (inicioSesion == true) {
+        window.location.href = "./miscompras.html";
+    } else {
+        window.location.href = "./reglogin.html";
+    }
+}

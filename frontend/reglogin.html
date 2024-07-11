@@ -12,43 +12,45 @@
 <body>
     <header>
         <div class="hcontainer">
-            <a href="index.html">
-                <h1>TicketCode</h1>
-            </a>
-            <a href="reglogin.html"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 70px;">
+                <a href="index.html"><h1>TicketCode</h1></a>
+                <a href="index.html"><p>Inicio</p></a>
+                <a href="#" onclick="perfilOn2()"><p>Mis compras</p></a>
+                </div>
+                <a href="#" onclick="perfilOn()" id="loginbutton"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
         </div>
     </header>
     <main>
         <div class="formularios">
             <form id="formRegistro">
-                <h3>Registro</h3>
+                <h2>Registro</h2>
                 <label for="usuario">Usuario</label>
-                <input type="text" name="usuario" id="usuario">
-                <label for="user">Contraseña</label>
-                <input type="password" name="contraseña" id="contraseña">
-                <label for="user">D.N.I.</label>
-                <input type="number" name="dni" id="dni" inputmode="numeric">
-                <label for="user">Nombre</label>
-                <input type="text" name="nombre" id="nombre">
-                <label for="user">Apellido</label>
-                <input type="text" name="apellido" id="apellido">
-                <label for="user">Correo electronico</label>
-                <input type="email" name="mail" id="mail">
-                <label for="user">Telefono</label>
-                <input type="number" name="telefono" id="telefono" inputmode="numeric">
+                <input type="text" name="usuario" id="usuario" required>
+                <label for="contraseña">Contraseña</label>
+                <input type="password" name="contraseña" id="contraseña" required>
+                <label for="dni">D.N.I.</label>
+                <input type="number" name="dni" id="dni" inputmode="numeric" required>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" required>
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido" required>
+                <label for="mail">Correo electronico</label>
+                <input type="email" name="mail" id="mail" required>
+                <label for="telefono">Telefono</label>
+                <input type="number" name="telefono" id="telefono" inputmode="numeric" required>
                 <input type="submit" value="Registrarse">
             </form>
 
 
             <form id="formInicio">
-                <h3>Iniciar Sesión</h3>
-                <input type="text" name="usuarioID" id="usuarioID" placeholder="Usuario">
-                <input type="password" name="contraseñaID" id="contraseñaID" placeholder="Contraseña">
+                <h2 style="margin-bottom: 20px;">Iniciar Sesión</h2>
+                <input type="text" name="usuarioID" id="usuarioID" placeholder="Usuario" required>
+                <input type="password" name="contraseñaID" id="contraseñaID" placeholder="Contraseña" required>
                 <input type="submit" value="Iniciar Sesion">
             </form>
         </div>
     </main>
-
+    <script src="./js/loginStatus.js"></script>
     <script src="./js/usuario.js"></script>
     <script src="https://kit.fontawesome.com/5c01fabc44.js" crossorigin="anonymous"></script>
 </body>

@@ -103,6 +103,13 @@ main{
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 5px;
+}
+
+#formRegistro input{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
 #formInicio{
@@ -110,6 +117,28 @@ main{
     flex-direction: column;
     width: 100%;
     gap: 1rem;
+   
+}
+
+#formInicio input{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+
+#formInicio input[type=submit], #formRegistro input[type=submit]{
+    margin-top: 15px;
+    background-color: #666666;
+    border: none;
+    color: white;
+    padding: 10px 0;
+}
+
+#formInicio input[type=submit]:hover, #formRegistro input:hover[type=submit]{
+    
+    background-color: #111111;
+   
 }
 
 /* Remueve la parte del input numbers donde se muestran
@@ -148,7 +177,7 @@ input[type=number] {
 }
 
 #chau{
-    margin-top: 80px;
+    margin-top: 1vh;
 }
 .descripciones{
     display: flex;
@@ -305,4 +334,9 @@ input[type=radio]{
     background-color: rgb(85, 85, 85);
     color: white;
     
+}
+
+#loginbutton::before{
+ content: "Iniciar sesión";
+ margin: 0 15px;
 }

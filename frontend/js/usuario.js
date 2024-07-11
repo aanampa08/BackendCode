@@ -83,7 +83,7 @@ document.getElementById('formInicio').addEventListener('submit', function (event
       if (resultado.auth && resultado.token) {
         //guardamos el token en el storage
         localStorage.setItem('token', resultado.token);
-        // window.location.href = "./dashboard.html";
+         window.location.href = "./index.html";
         console.log("se hizo el loguin");
       }
       else {

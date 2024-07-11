@@ -11,8 +11,8 @@ function parseData(content){
 
         //Filtramos la informacion del concierto y construimos CARD x CONCIERTO
         const conciertoDiv = document.createElement("a");
-        conciertoDiv.setAttribute("href", `./cardabierta.html?id=${concierto.idConcierto}`);
-
+        conciertoDiv.setAttribute("href", `#`);
+        conciertoDiv.setAttribute("onclick", `noLogged(${concierto.idConcierto})`);
         conciertoDiv.classList.add("card-concierto");
         const artista = document.createElement("h3");
         artista.innerText=`${concierto.Artista}`;
@@ -37,6 +37,7 @@ function parseData(content){
 
         //Agregamos el div del concierto en el section
         section.append(conciertoDiv);
+        
     }
     
 }
@@ -50,3 +51,12 @@ fetch("http://localhost:3000/ticketCode/conciertos")
 .then(response_received)
 .then(parseData)
 .catch(request_error);
+
+
+function noLogged(idConcierto){
+    if (inicioSesion == false) {
+        window.location.href = "./reglogin.html";
+    } else {
+        window.location.href = `./cardabierta.html?id=${idConcierto}`;
+    }
+}

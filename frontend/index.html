@@ -12,8 +12,12 @@
 <body>
     <header>
         <div class="hcontainer">
-            <a href="index.html"><h1>TicketCode</h1></a>
-            <a href="reglogin.html"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 70px;">
+                <a href="index.html"><h1>TicketCode</h1></a>
+                <a href="index.html"><p>Inicio</p></a>
+                <a href="#" onclick="perfilOn2()"><p>Mis compras</p></a>
+                </div>
+            <a href="#" onclick="perfilOn()" id="loginbutton"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
         </div>
     </header>
     <main>
@@ -31,6 +35,7 @@
 
         </section>
     </main>
+    <script src="./js/loginStatus.js"></script>
     <script src="./js/script.js"></script>
     <script src="https://kit.fontawesome.com/5c01fabc44.js" crossorigin="anonymous"></script>
 </body>
