@@ -2,6 +2,8 @@ let cantidad = 1;
 let precioClickeado = 0;
 let idTicketFinal;
 let conciertoId;
+let seleccionDeLugar = false;
+let metodoDePago = false;
 // FUNCIONES ENCARGADAS DE FILTRAR LAS PETICIONES AL BACKEND
 function response_received(response) {
     //recibimos y enviamos la respuesta obtenida en formato json
@@ -125,6 +127,7 @@ fetch(`http://localhost:3000/ticketCode/ticket`)
                 svg.src = `./img/${i + 2}.svg`;
                 imagenClickeada = `./img/${i + 2}.svg`;
                 actualizarPrecio(ticket.idTicket, ticket.Precio);
+                seleccionLugar();
             });
             label.addEventListener('mouseleave', function () {
 
@@ -164,6 +167,31 @@ fetch(`http://localhost:3000/ticketCode/ticket`)
         console.log("Error capturado: ", error);
     })
 
+    
+    const botonCompra = document.getElementById("submitCompra");
+
+  function metodoActivo(){
+    metodoDePago = true;
+
+    if(metodoDePago == true && seleccionDeLugar == true){
+        botonCompra.classList.add('completed');
+      } else {
+        botonCompra.classList.remove('completed');
+      }
+  }
+
+  function seleccionLugar(){
+    seleccionDeLugar = true;
+    if(metodoDePago == true && seleccionDeLugar == true){
+        botonCompra.classList.add('completed');
+      } else {
+        botonCompra.classList.remove('completed');
+      }
+  }
+
+
+
+  
 
 
 document.getElementById('compraForm').addEventListener('submit', function (event) {
