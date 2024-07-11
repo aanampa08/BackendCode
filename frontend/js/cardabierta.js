@@ -203,21 +203,17 @@ document.getElementById('compraForm').addEventListener('submit', function (event
     const usuario_id = idDeUsuario;
     const fecha = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const concierto_id = conciertoId;
-    const ticketsid = [];
-    const tickets_precio = [];
-
-    for(let i = 0; i < cantidad; i++){
-        ticketsid.push(idTicketFinal);
-        tickets_precio.push(precioClickeado);
-    }
+    const ticket_id = idTicketFinal;
+    const ticket_precio = precioClickeado;
     
     const nuevaCompra = {
         fecha: fecha,
         monto: monto,
         usuario_id: usuario_id,
         concierto_id: concierto_id,
-        ticketsid: ticketsid,
-        tickets_precio: tickets_precio
+        ticket_id: ticket_id,
+        ticket_precio: ticket_precio,
+        cantidad:cantidad
     };
     // Configuración de la solicitud
     const method = {
