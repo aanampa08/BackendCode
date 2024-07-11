@@ -397,6 +397,21 @@ input[type=radio]{
     gap: 15px;
 }
 
+#contenedor-de-cards b{
+    font-weight: 600;
+}
+
+#noEncontrado{
+    position: absolute;
+    font-size: 1.2rem;
+    font-weight: 600;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 .card-compras{
     display: flex;
     padding: 25px;
@@ -431,14 +446,25 @@ input[type=radio]{
     padding-right: 50px;
 }
 
-.precioLugar{
+.divTextoCompras h3{
+    font-weight: 500;
+}
+
+.debajoArtista{
     display: flex;
     justify-content: space-between;
 }
 
-.precioLugar span{
+.debajoArtista span{
     font-weight: 500;
     font-size: 1.4rem;
+}
+
+.precioCompras{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .borrar-compra{
@@ -516,3 +542,4 @@ input[type=radio]{
     background-color: #a10b00;
 
 }
+
