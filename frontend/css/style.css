@@ -8,6 +8,7 @@
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 header{
@@ -104,26 +105,48 @@ main{
     flex-direction: column;
     width: 100%;
     gap: 5px;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: rgb(235, 235, 235);
 }
 
 #formRegistro input{
     padding: 5px;
     border-radius: 5px;
     font-size: 1rem;
+    
+}
+
+#formRegistro p{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #058822;
+    text-align: right;
 }
 
 #formInicio{
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
     gap: 1rem;
-   
+    padding: 30px;
+    border-radius: 15px;
+    background-color: rgb(235, 235, 235);
 }
 
 #formInicio input{
     padding: 5px;
     border-radius: 5px;
     font-size: 1rem;
+}
+
+#formInicio p{
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #ca0000;
 }
 
 
@@ -339,4 +362,121 @@ input[type=radio]{
 #loginbutton::before{
  content: "Iniciar sesión";
  margin: 0 15px;
+}
+
+#contenedor-de-cards{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card-compras{
+    display: flex;
+    padding: 25px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 15px;
+    gap: 15px;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    width: 100%;
+}
+
+.card-compras img{
+    height: 200px;
+    min-width: 500px;
+    object-fit: cover;
+}
+
+.divTextoCompras{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.precioLugar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.precioLugar span{
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.borrar-compra{
+    position: absolute;
+    right: 0;
+    margin-right: 25px;
+    
+}
+
+.borrar-compra:hover i{
+    color: red !important;
+    
+}
+
+#perfilDiv{
+    margin: 0 auto;
+    display: flex; 
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+     align-items: center; 
+     padding: 50px 30px; 
+     background-color: rgb(235, 235, 235); 
+    border-radius: 15px;
+    gap: 40px;
+}
+
+.divCambiarUsuario{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.divCambiarUsuario input{
+    
+    padding: 5px 10px;
+    
+    border-radius: 5px;
+   
+}
+
+.divCambiarUsuario button{
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    background-color: #535353;
+    color: white;
+}
+
+.divCambiarUsuario button:hover{
+    
+    background-color: #428550;
+    color: white;
+}
+
+.divCambiarUsuario button:nth-child(6):hover{
+    
+    background-color: #ec1d0e;
+    color: white;
+}
+
+.logout{
+    margin-left: 5px;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 15px;
+    background-color: #b80c00;
+    color: white;
+    cursor: pointer;
+}
+
+.logout:hover{
+   
+    background-color: #a10b00;
+
 }

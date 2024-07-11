@@ -3,6 +3,11 @@ document.getElementById('formRegistro').addEventListener('submit', function (eve
   // Evitar el envío del formulario
   event.preventDefault();
 
+  const realizado = document.getElementById("registroExitoso");
+  realizado.textContent = "*Usuario registrado con exito";
+  setTimeout(() =>{
+    realizado.textContent = "";
+  }, "4000");
   // Consigo los datos del formulario
   const usuario = document.getElementById('usuario').value;
   const contraseña = document.getElementById('contraseña').value;
@@ -80,6 +85,7 @@ document.getElementById('formInicio').addEventListener('submit', function (event
       return response.json();
     })
     .then(resultado => {
+      const inicioError = document.getElementById("usuarioInvalido");
       if (resultado.auth && resultado.token) {
         //guardamos el token en el storage
         localStorage.setItem('token', resultado.token);
@@ -88,6 +94,7 @@ document.getElementById('formInicio').addEventListener('submit', function (event
       }
       else {
         console.error('error de inicio de sesion: ', resultado);
+        inicioError.textContent = "*Usuario y/o contraseña invalida";
       }
 
     })

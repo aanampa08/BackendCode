@@ -43,7 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 inicioSesion = false;
             }
-            
+
+            const divCambiarUsuario = document.createElement("div");
+            divCambiarUsuario.classList.add("divCambiarUsuario");
+            const titulo = document.createElement("h2");
+            titulo.textContent = "Datos de la cuenta";
+            const textoUsuario = document.createElement("p");
+            textoUsuario.textContent = "Nombre de usuario:";
             const displayText = document.createElement("span");
             displayText.setAttribute("id","displayText");
             displayText.textContent = `${data[0].Usuario}`;
@@ -62,13 +68,38 @@ document.addEventListener('DOMContentLoaded', () => {
             cancelButton.setAttribute("id","cancelButton");
             cancelButton.style.display = "none";
             cancelButton.textContent = "Cancelar";
+            
+            const logout = document.createElement("button");
+            logout.classList.add("logout");
+            logout.textContent = "Cerrar sesión";
+            logout.setAttribute("onclick", "deslogin()")
 
-            perfilDiv.append(displayText);
-            perfilDiv.append(editText);
-            perfilDiv.append(editButton);
-            perfilDiv.append(saveButton);
-            perfilDiv.append(cancelButton);
+            const nombre = document.createElement("p");
+            nombre.textContent = `Nombre: ${data[0].Nombre}`;
 
+            const apellido = document.createElement("p");
+            apellido.textContent = `Apellido: ${data[0].Apellido}`;
+            const email = document.createElement("p");
+            email.textContent = `E-Mail: ${data[0].Mail}`;
+            const dni = document.createElement("p");
+            dni.textContent = `D.N.I.: ${data[0].Dni}`;
+            const telefono = document.createElement("p");
+            telefono.textContent = `Numero de telefono: ${data[0].Telefono}`;
+            
+            divCambiarUsuario.append(textoUsuario);
+            divCambiarUsuario.append(displayText);
+            divCambiarUsuario.append(editText);
+            divCambiarUsuario.append(editButton);
+            divCambiarUsuario.append(saveButton);
+            divCambiarUsuario.append(cancelButton);
+            perfilDiv.append(titulo);
+            perfilDiv.append(divCambiarUsuario);
+            perfilDiv.append(nombre);
+            perfilDiv.append(apellido);
+            perfilDiv.append(dni);
+            perfilDiv.append(email);
+            perfilDiv.append(telefono);
+            perfilDiv.append(logout);
             
 
     editButton.addEventListener('click', () => {
@@ -112,7 +143,7 @@ function perfilOn() {
     if (inicioSesion == true) {
         window.location.href = "./perfil.html";
     } else {
-
+    window.location.href = "./reglogin.html"
     }
 }
 
