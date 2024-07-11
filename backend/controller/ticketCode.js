@@ -94,18 +94,17 @@ const getConcertById = (req, res) => {
     });
 }
 const createCompra = (req, res) => {
-    const { fecha, monto, usuario_id, concierto_id, ticketsid, tickets_precio } = req.body;
-    const sql = 'INSERT INTO compra(Fecha,Monto,usuario_id) VALUES (?,?,?)';
-    db.query(sql, [fecha, monto, usuario_id], (err, result) => {
+    const { fecha, monto, usuario_id, concierto_id, ticket_id, ticket_precio, cantidad } = req.body;
+
+    const sql = 'INSERT INTO compra(Fecha,Monto,concierto_id,usuario_id) VALUES (?,?,?,?)';
+    db.query(sql, [fecha, monto, concierto_id, usuario_id], (err, result) => {
         if (err) throw err;
 
         const compra_id = result.insertId;
-        for (let i = 0; i < ticketsid.length; i++) {
-            const sql1 = 'INSERT INTO detalle_compra(compra_id,concierto_id,ticket_id,precio_unitario) VALUES(?,?,?,?)';
-            db.query(sql1, [compra_id, concierto_id, ticketsid[i], tickets_precio[i]], (err, result) => {
-                if (err) throw err;
-            });
-        }
+        const sql1 = 'INSERT INTO detalle_compra(compra_id,cantidadTicket,ticket_id,precio_unitario) VALUES (?,?,?,?)';
+        db.query(sql1, [compra_id, cantidad, ticket_id, ticket_precio], (err, result) => {
+            if (err) throw err;
+        });
         res.json({ estado: true });
 
 
@@ -125,28 +124,19 @@ const getAlltickets = (req, res) => {
 
 const getAllcompras = (req, res) => {
     const { id } = req.params;
-    const sql = 'select * from cliente,compra where cliente.idCliente=? and compra.usuario_id=?';
-    db.query(sql, [id, id], (err, resultado_compra) => {
+
+    const sql = 'select compra.idCompra,compra.Fecha as FechaCompra,Monto,concierto.Nombre,concierto.Artista,concierto.Imagen,concierto.Fecha as FechaConcierto,cantidadTicket,sector,precio_unitario '
+        + 'from compra,concierto,detalle_compra,ticket where usuario_id=? and idConcierto=concierto_id and compra_id=idCompra and idTicket=ticket_id';
+    db.query(sql, [id], (err, resultado_compra) => {
         if (err) throw err;
         if (resultado_compra.length > 0) {
-            const idCompra = resultado_compra[0].idCompra;
-            const monto = resultado_compra[0].Monto;
-            const fecha = resultado_compra[0].Fecha;
-            const sql_detalle = 'select compra_id,Nombre,sector,precio_unitario,concierto.Imagen from compra,ticket,detalle_compra,concierto where usuario_id=? and compra_id=idCompra and ticket_id=idTicket and concierto.idConcierto=detalle_compra.concierto_id';
-
-            db.query(sql_detalle, [id], (err, resultado_detalle_compra) => {
-                if (err) throw err;
-
-                res.json({ idCompra, monto, fecha, resultado_detalle_compra });
-
-
-                console.log("Compra encontrada.");
-            });
+            res.json({resultado_compra });
+            console.log("Compras encontradas.");
         }
-        else {
-            res.json({ mensaje: 'No hay compras realizadas por el usuario' });
+        else{
+            res.json({ mensaje: false });
         }
-
+        
     });
 }
 
@@ -154,7 +144,7 @@ const updateUser = (req, res) => {
     //recibimos el id del usuario a borrar
     const { id } = req.params;
     const { nuevoUsuario } = req.body;
-    console.log("genero el nuevo: ",id,nuevoUsuario);
+    console.log("genero el nuevo: ", id, nuevoUsuario);
     const sql = 'UPDATE Cliente SET Usuario=? WHERE idCliente=?';
 
     db.query(sql, [nuevoUsuario, id], (err, result) => {
@@ -164,17 +154,17 @@ const updateUser = (req, res) => {
 
 };
 
-const deleteCompra = (req,res) => {
+const deleteCompra = (req, res) => {
     //recibimos el id de la compra a borrar
-    const {idCompra} = req.params;
-    
+    const { idCompra } = req.params;
+
     const sql = 'DELETE FROM detalle_compra WHERE compra_id = ?';
-    db.query(sql,[idCompra],(err,result) => {
+    db.query(sql, [idCompra], (err, result) => {
         if (err) throw err;
         const sql1 = 'DELETE FROM compra WHERE idCompra = ?';
-        db.query(sql1,[idCompra],(err,result)=>{
+        db.query(sql1, [idCompra], (err, result) => {
             if (err) throw err;
-            res.json({mensaje: 'Compra eliminada correctamente'});
+            res.json({ mensaje: 'Compra eliminada correctamente' });
         });
 
     });
@@ -195,12 +185,12 @@ const logout = (req, res) => {
         if (err) {
             if (err.code === 'ER_DUP_ENTRY') {
                 // Si el token ya está en la base de datos, devolver un mensaje de éxito
-                return res.status(200).send({ message:true });
+                return res.status(200).send({ message: true });
             } else {
                 return res.status(500).send({ message: 'Failed to invalidate token', error: err });
             }
         }
-        res.status(200).send({ message: true});
+        res.status(200).send({ message: true });
     });
 };
 
@@ -213,8 +203,8 @@ module.exports = {
     , updateUser
     , getConcertById
     , createCompra
-    ,deleteCompra
+    , deleteCompra
     , getAlltickets
     , getAllcompras
-    ,logout
+    , logout
 };
