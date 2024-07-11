@@ -248,5 +248,7 @@ document.getElementById('compraForm').addEventListener('submit', function (event
         .catch(error => {
             console.error('Error:', error);
         });
+
+        window.location.href = "./miscompras.html";
 });
 
