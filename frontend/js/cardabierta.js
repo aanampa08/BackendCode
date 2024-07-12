@@ -167,37 +167,37 @@ fetch(`http://localhost:3000/ticketCode/ticket`)
         console.log("Error capturado: ", error);
     })
 
-    
-    const botonCompra = document.getElementById("submitCompra");
 
-  function metodoActivo(){
+const botonCompra = document.getElementById("submitCompra");
+
+function metodoActivo() {
     metodoDePago = true;
 
-    if(metodoDePago == true && seleccionDeLugar == true){
+    if (metodoDePago == true && seleccionDeLugar == true) {
         botonCompra.classList.add('completed');
-      } else {
+    } else {
         botonCompra.classList.remove('completed');
-      }
-  }
+    }
+}
 
-  function seleccionLugar(){
+function seleccionLugar() {
     seleccionDeLugar = true;
-    if(metodoDePago == true && seleccionDeLugar == true){
+    if (metodoDePago == true && seleccionDeLugar == true) {
         botonCompra.classList.add('completed');
-      } else {
+    } else {
         botonCompra.classList.remove('completed');
-      }
-  }
+    }
+}
 
 
 
-  
+
 
 
 document.getElementById('compraForm').addEventListener('submit', function (event) {
     // Evitar el envío del formulario
     event.preventDefault();
-    
+
     // Consigo los datos del formulario
     const monto = precioClickeado * cantidad;
     const usuario_id = idDeUsuario;
@@ -205,7 +205,7 @@ document.getElementById('compraForm').addEventListener('submit', function (event
     const concierto_id = conciertoId;
     const ticket_id = idTicketFinal;
     const ticket_precio = precioClickeado;
-    
+
     const nuevaCompra = {
         fecha: fecha,
         monto: monto,
@@ -213,7 +213,7 @@ document.getElementById('compraForm').addEventListener('submit', function (event
         concierto_id: concierto_id,
         ticket_id: ticket_id,
         ticket_precio: ticket_precio,
-        cantidad:cantidad
+        cantidad: cantidad
     };
     // Configuración de la solicitud
     const method = {
@@ -224,7 +224,7 @@ document.getElementById('compraForm').addEventListener('submit', function (event
         body: JSON.stringify(nuevaCompra)
     };
 
-     // Hacer la solicitud POST
+    // Hacer la solicitud POST
     fetch('http://localhost:3000/ticketCode/compra', method)
         .then(response => {
             if (!response.ok) {
@@ -245,6 +245,6 @@ document.getElementById('compraForm').addEventListener('submit', function (event
             console.error('Error:', error);
         });
 
-        window.location.href = "./miscompras.html";
+    window.location.href = "./miscompras.html";
 });
 
